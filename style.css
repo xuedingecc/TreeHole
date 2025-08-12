@@ -109,17 +109,28 @@ h1 {
     margin-bottom: 2rem;
 }
 
+/* 保持 .treehole-card 为块级元素，不限制子元素宽度 */
 .treehole-card {
     background: var(--card-bg);
     border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    margin-bottom: 2rem;
+    padding: 1.8rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+
+    /* 👉 关键：不要用 flex + align-items: center（它会压缩子元素） */
+    /* 改为传统块级居中：通过 margin 控制 */
+    max-width: 800px;
+    margin: 0 auto; /* 卡片本身居中 */
+
+    /* 新增：确保 padding 不影响 width 计算 */
+    box-sizing: border-box;
 }
 
 .message-input {
+    /* 👉 还原原始大小：占满父容器可用宽度 */
     width: 100%;
-    min-height: 150px;
+    min-height: 140px;
     padding: 1rem;
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -128,6 +139,28 @@ h1 {
     resize: vertical;
     margin-bottom: 1rem;
     transition: border 0.2s;
+    background: #fafafa;
+
+    /* 确保宽度最大化 */
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    /* 移除 width: 100% */
+    width: 30%;
+    padding: 0.6rem 1.4rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    /* 关键：让按钮在父容器中居中 */
+    display: block;
+    margin: 0 auto; /* 水平居中 */
 }
 
 .message-input:focus {
@@ -136,17 +169,6 @@ h1 {
     box-shadow: 0 0 0 3px var(--primary-light);
 }
 
-.submit-btn {
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
 
 .submit-btn:hover {
     background-color: #0d8e6d;
