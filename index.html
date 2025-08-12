@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>心灵树洞 | 个人精神档案馆</title>
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -12,10 +12,6 @@
         <div class="nav-container">
             <ul class="nav-list">
                 <li class="nav-item active">留白集</li>
-<!--                <li class="nav-item">行迹</li>-->
-<!--                <li class="nav-item">未完成</li>-->
-<!--                <li class="nav-item">回音室</li>-->
-<!--                <li class="nav-item">日常切片</li>-->
                 <li class="nav-item">静默书写</li>
             </ul>
         </div>
@@ -28,30 +24,20 @@
         </header>
 
         <div class="treehole-card">
-
             <form id="messageForm">
-                <textarea class="message-input" placeholder="今天发生了什么？有什么想倾诉的吗？" required></textarea>
+                <textarea
+                    class="message-input"
+                    id="messageInput"
+                    placeholder="今天发生了什么？有什么想倾诉的吗？"
+                    required
+                ></textarea>
                 <button type="submit" class="submit-btn">提交</button>
             </form>
         </div>
 
         <div class="messages" id="messagesContainer">
             <h2>来自他人的分享</h2>
-
-            <div class="message">
-                <div class="message-content">今天终于鼓起勇气向老板提出了加薪请求，虽然被拒绝了，但至少我尝试过了。感觉比一直憋在心里好多了。</div>
-                <div class="message-time">2023年6月15日</div>
-            </div>
-
-            <div class="message">
-                <div class="message-content">最近总是失眠，脑子里有太多想法。希望能找到内心的平静。</div>
-                <div class="message-time">2023年6月12日</div>
-            </div>
-
-            <div class="message">
-                <div class="message-content">毕业五年了，看着同学们都事业有成，而我还在一家小公司做着不喜欢的工作。不知道什么时候才能找到自己的人生方向。</div>
-                <div class="message-time">2023年6月8日</div>
-            </div>
+            <!-- 消息将由 JavaScript 动态加载 -->
         </div>
     </div>
 
@@ -59,6 +45,10 @@
         <p>© 2025 留白集 · 无算法推荐，仅为你我可见</p>
     </footer>
 
+    <!-- 引入 Supabase JS 客户端 -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- 内联脚本（你也可以改为外链 script.js） -->
     <script src="script.js"></script>
 </body>
 </html>
