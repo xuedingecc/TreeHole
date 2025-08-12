@@ -1,269 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TreeHole - Whisper Your Secrets</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #0ea5e9;
-            --text-color: #334155;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --shadow: rgba(15, 23, 42, 0.04) 0px 10px 15px -3px, rgba(15, 23, 42, 0.02) 0px 4px 6px -2px;
-            --border-radius: 12px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-
-        .subtitle {
-            font-size: 1.25rem;
-            color: #64748b;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: rgba(15, 23, 42, 0.1) 0px 20px 25px -5px, rgba(15, 23, 42, 0.04) 0px 10px 10px -5px;
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 4px;
-            width: 100%;
-            background-color: var(--primary-color);
-        }
-
-        .card h2 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .card p {
-            color: #475569;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-container {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
-            box-shadow: var(--shadow);
-            margin-bottom: 3rem;
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 150px;
-            padding: 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            resize: vertical;
-            transition: border-color 0.3s ease;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-weight: 500;
-        }
-
-        button:hover {
-            background-color: #0284c7;
-        }
-
-        .timestamp {
-            color: #94a3b8;
-            font-size: 0.875rem;
-            margin-top: 1rem;
-            text-align: right;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 4rem;
-            color: #64748b;
-            font-size: 0.875rem;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-            
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>心灵树洞 | 个人精神档案馆</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>TreeHole</h1>
-        <p class="subtitle">A safe place to share your thoughts, secrets, and dreams anonymously. No judgments, just release.</p>
-    </header>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li class="nav-item active">留白集</li>
+<!--                <li class="nav-item">行迹</li>-->
+<!--                <li class="nav-item">未完成</li>-->
+<!--                <li class="nav-item">回音室</li>-->
+<!--                <li class="nav-item">日常切片</li>-->
+                <li class="nav-item">静默书写</li>
+            </ul>
+        </div>
+    </nav>
 
-    <div class="form-container">
-        <h2>Share your thoughts</h2>
-        <form id="secretForm">
-            <textarea id="secretInput" placeholder="What's on your mind? Share it here..."></textarea>
-            <button type="submit">Drop into the hole</button>
-        </form>
-    </div>
+    <div class="container">
+        <header>
+            <h1>今天想写点什么</h1>
+            <p class="subtitle">记录生活、思考与成长的痕迹</p>
+        </header>
 
-    <div class="container" id="messagesContainer">
-        <!-- Messages will be dynamically added here -->
+        <div class="treehole-card">
+
+            <form id="messageForm">
+                <textarea class="message-input" placeholder="今天发生了什么？有什么想倾诉的吗？" required></textarea>
+                <button type="submit" class="submit-btn">提交</button>
+            </form>
+        </div>
+
+        <div class="messages" id="messagesContainer">
+            <h2>来自他人的分享</h2>
+
+            <div class="message">
+                <div class="message-content">今天终于鼓起勇气向老板提出了加薪请求，虽然被拒绝了，但至少我尝试过了。感觉比一直憋在心里好多了。</div>
+                <div class="message-time">2023年6月15日</div>
+            </div>
+
+            <div class="message">
+                <div class="message-content">最近总是失眠，脑子里有太多想法。希望能找到内心的平静。</div>
+                <div class="message-time">2023年6月12日</div>
+            </div>
+
+            <div class="message">
+                <div class="message-content">毕业五年了，看着同学们都事业有成，而我还在一家小公司做着不喜欢的工作。不知道什么时候才能找到自己的人生方向。</div>
+                <div class="message-time">2023年6月8日</div>
+            </div>
+        </div>
     </div>
 
     <footer>
-        <p>TreeHole &copy; 2023. All secrets are anonymous and not stored permanently.</p>
+        <p>© 2025 留白集 · 无算法推荐，仅为你我可见</p>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('secretForm');
-            const container = document.getElementById('messagesContainer');
-            const secretInput = document.getElementById('secretInput');
-            
-            // Load saved messages from localStorage
-            loadMessages();
-            
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const message = secretInput.value.trim();
-                if (message) {
-                    addMessage(message);
-                    secretInput.value = '';
-                }
-            });
-            
-            function addMessage(text) {
-                const messages = getMessages();
-                const newMessage = {
-                    text,
-                    timestamp: new Date().toISOString()
-                };
-                
-                messages.unshift(newMessage);
-                saveMessages(messages);
-                renderMessages();
-            }
-            
-            function getMessages() {
-                const stored = localStorage.getItem('treeholeMessages');
-                return stored ? JSON.parse(stored) : [];
-            }
-            
-            function saveMessages(messages) {
-                localStorage.setItem('treeholeMessages', JSON.stringify(messages));
-            }
-            
-            function loadMessages() {
-                renderMessages();
-            }
-            
-            function renderMessages() {
-                container.innerHTML = '';
-                const messages = getMessages();
-                
-                messages.forEach(message => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    
-                    const date = new Date(message.timestamp);
-                    const formattedDate = date.toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    });
-                    
-                    card.innerHTML = `
-                        <p>${message.text}</p>
-                        <div class="timestamp">${formattedDate}</div>
-                    `;
-                    
-                    container.appendChild(card);
-                });
-                
-                if (messages.length === 0) {
-                    const emptyMessage = document.createElement('div');
-                    emptyMessage.className = 'card';
-                    emptyMessage.innerHTML = `
-                        <h2>The tree hole is empty</h2>
-                        <p>Be the first to share a thought.</p>
-                    `;
-                    container.appendChild(emptyMessage);
-                }
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
