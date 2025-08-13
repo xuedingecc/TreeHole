@@ -12,6 +12,7 @@
         <div class="nav-container">
             <ul class="nav-list">
                 <li class="nav-item active">留白集</li>
+                <li class="nav-item">面试手记</li>
                 <li class="nav-item">静默书写</li>
             </ul>
         </div>
@@ -24,20 +25,33 @@
         </header>
 
         <div class="treehole-card">
+            <div class="tag-buttons">
+                <button class="tag-button active" data-tag="留白集">#留白集</button>
+                <button class="tag-button" data-tag="面试手记">#面试手记</button>
+                <button class="tag-button" data-tag="静默书写">#静默书写</button>
+            </div>
             <form id="messageForm">
                 <textarea
                     class="message-input"
                     id="messageInput"
                     placeholder="今天发生了什么？有什么想倾诉的吗？"
                     required
-                ></textarea>
+                >#留白集  </textarea>
                 <button type="submit" class="submit-btn">提交</button>
             </form>
         </div>
 
         <div class="messages" id="messagesContainer">
-            <h2>来自他人的分享</h2>
+            <h2>足迹留白</h2>
             <!-- 消息将由 JavaScript 动态加载 -->
+        </div>
+    </div>
+    <!-- 模态框 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalMessageContent" class="modal-message-content"></div>
+            <div id="modalMessageTime" class="modal-message-time"></div>
         </div>
     </div>
 
