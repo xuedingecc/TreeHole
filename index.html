@@ -4,26 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>心灵树洞 | 个人精神档案馆</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../css/index.css" />
 </head>
 <body>
     <!-- 顶部导航栏 -->
     <nav class="navbar">
-        <div class="nav-container">
-            <ul class="nav-list">
-                <li class="nav-item active">留白集</li>
-                <li class="nav-item">面试手记</li>
-                <li class="nav-item">静默书写</li>
-            </ul>
-        </div>
+      <div class="nav-container">
+        <ul class="nav-list">
+            <li class="nav-item active">留白集</li>
+            <li class="nav-item"><a href="html/interview.html">面试手记</a></li>
+            <li class="nav-item"><a href="html/silent.html">碎光碎语</a></li>
+        </ul>
+      </div>
     </nav>
 
     <div class="container">
+        <!-- 默认页：留白集 -->
         <header>
-            <h1>今天想写点什么</h1>
-            <p class="subtitle">记录生活、思考与成长的痕迹</p>
+                <h1>今天想写点什么</h1>
+                <p class="subtitle">记录生活、思考与成长的痕迹</p>
         </header>
-
         <div class="treehole-card">
             <div class="tag-buttons">
                 <button class="tag-button active" data-tag="留白集">#留白集</button>
@@ -40,11 +40,11 @@
                 <button type="submit" class="submit-btn">提交</button>
             </form>
         </div>
-
         <div class="messages" id="messagesContainer">
-            <h2>足迹留白</h2>
+            <h2>行路 | 回声</h2>
             <!-- 消息将由 JavaScript 动态加载 -->
         </div>
+
     </div>
     <!-- 模态框 -->
     <div id="modal" class="modal">
@@ -56,13 +56,13 @@
     </div>
 
     <footer>
-        <p>© 2025 留白集 · 无算法推荐，仅为你我可见</p>
+        <p>© 2025 心灵树洞 · 无算法推荐，仅为你我可见</p>
     </footer>
 
     <!-- 引入 Supabase JS 客户端 -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- 内联脚本（你也可以改为外链 script.js） -->
-    <script src="script.js"></script>
+    <!-- 内联脚本（你也可以改为外链 index.js） -->
+    <script src="../js/index.js"></script>
 </body>
 </html>
