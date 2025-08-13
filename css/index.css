@@ -1,0 +1,311 @@
+:root {
+    --primary: #10a37f;
+    --primary-light: rgba(16, 163, 127, 0.1);
+    --text: #333;
+    --light-text: #666;
+    --lighter-text: #999;
+    --bg: #f9f9f9;
+    --card-bg: #fff;
+    --border: #e0e0e0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--bg);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* 顶部导航栏样式 */
+.navbar {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    position: relative;
+    padding: 1.5rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: var(--light-text);
+}
+
+.nav-item:hover {
+    color: var(--primary);
+}
+
+.nav-item.active {
+    color: var(--primary);
+}
+
+/* 灵动效果 */
+.nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: var(--primary);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-item:hover::after,
+.nav-item.active::after {
+    width: 80%;
+}
+
+.nav-item:active {
+    transform: translateY(2px);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--light-text);
+    margin-bottom: 2rem;
+}
+
+/* 保持 .treehole-card 为块级元素，不限制子元素宽度 */
+.treehole-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+
+    /* 👉 关键：不要用 flex + align-items: center（它会压缩子元素） */
+    /* 改为传统块级居中：通过 margin 控制 */
+    max-width: 800px;
+    margin: 0 auto; /* 卡片本身居中 */
+
+    /* 新增：确保 padding 不影响 width 计算 */
+    box-sizing: border-box;
+}
+
+.message-input {
+    /* 👉 还原原始大小：占满父容器可用宽度 */
+    width: 100%;
+    min-height: 140px;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    margin-bottom: 1rem;
+    transition: border 0.2s;
+    background: #fafafa;
+
+    /* 确保宽度最大化 */
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    /* 移除 width: 100% */
+    width: 30%;
+    padding: 0.6rem 1.4rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    /* 关键：让按钮在父容器中居中 */
+    display: block;
+    margin: 0 auto; /* 水平居中 */
+}
+
+.message-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.submit-btn:hover {
+    background-color: #0d8e6d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.messages {
+    margin-top: 3rem;
+}
+
+.message {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border);
+    position: relative;
+    transition: transform 0.3s ease;
+    cursor: pointer; /* 添加鼠标指针样式 */
+    overflow: hidden;
+}
+
+.message:hover {
+    transform: translateY(-3px);
+}
+
+.message-time {
+    font-size: 0.85rem;
+    color: var(--lighter-text);
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
+.message-content {
+    white-space: nowrap; /* 防止换行 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 显示省略号 */
+    max-width: 100%;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* 背景半透明黑色 */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-message-content {
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+}
+
+.modal-message-time {
+    font-size: 0.85rem;
+    color: var(--lighter-text);
+    text-align: right;
+}
+
+footer {
+        text-align: center;
+        padding: 2rem;
+        color: var(--light-text);
+        font-size: 0.9rem;
+    }
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 1rem;
+    }
+
+    .nav-list {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-item {
+        padding: 1rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .tag-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tag-button {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.navbar a {
+  text-decoration: none;
+  color: inherit;   /* 保持原来字体颜色 */
+}

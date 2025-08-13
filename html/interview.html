@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>心灵树洞 | 个人精神档案馆</title>
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/interview.css" />
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html">留白集</a></li>
+          <li class="nav-item active">面试手记</li>
+          <li class="nav-item"><a href="silent.html">碎光碎语</a></li>
+        </ul>
+      </div>
+    </nav>
+
+<!--    <div class="container">-->
+        <div class="interview-wrapper">
+            <!-- 左侧时间轴 -->
+            <aside class="timeline" id="timeline"></aside>
+
+            <!-- 右侧卡片区 -->
+            <main class="interview-cards" id="interviewCards"></main>
+        </div>
+
+<!--    </div>-->
+    <!-- 模态框 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalMessageContent" class="modal-message-content"></div>
+            <div id="modalMessageTime" class="modal-message-time"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 心灵树洞 · 无算法推荐，仅为你我可见</p>
+    </footer>
+
+    <!-- 引入 Supabase JS 客户端 -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- 内联脚本（你也可以改为外链 index.js） -->
+<!--    <script src="index.js"></script>-->
+    <script src="../js/interview.js"></script>
+</body>
+</html>

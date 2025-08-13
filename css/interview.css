@@ -1,0 +1,83 @@
+/* interview.css */
+:root {
+    --timeline-width: 180px;
+    --timeline-color: #10a37f;
+}
+
+body {
+    margin: 0;
+    background: #f9f9f9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.interview-wrapper {
+    display: flex;
+    max-width: 1000px;
+    margin: 2rem auto;
+}
+
+/* 左侧时间轴 */
+.timeline {
+    width: var(--timeline-width);
+    border-right: 2px solid var(--timeline-color);
+    padding-right: 1rem;
+    margin-right: 2rem;
+    flex-shrink: 0;
+}
+
+.timeline-item {
+    position: relative;
+    margin: 1.2rem 0;
+    padding-left: 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    background: var(--timeline-color);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.timeline-item.active {
+    font-weight: 600;
+    color: var(--timeline-color);
+}
+
+/* 右侧卡片区 */
+.interview-cards {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.interview-cards .message {
+    cursor: pointer;
+}
+
+.interview-cards .message-content {
+  white-space: pre-wrap;   /* 允许自动换行并保留空白 */
+  word-break: break-word;
+}
+
+.interview-cards {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-height: 500px;   /* 限制高度 */
+  overflow-y: auto;    /* 超出滚动 */
+}
+
+.navbar a {
+  text-decoration: none;
+  color: inherit;   /* 保持原来字体颜色 */
+}
