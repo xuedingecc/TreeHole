@@ -7,10 +7,42 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const { createClient } = supabase;
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// 页面加载完成后加载消息
+let selectedTag = ''; // 默认选中的标签为空
+
 document.addEventListener('DOMContentLoaded', async () => {
     await loadMessages();
+    setupTagButtons();
+    setupModal();
 });
+
+function setupTagButtons() {
+    const buttons = document.querySelectorAll('.tag-button');
+    buttons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            // 阻止事件冒泡
+            e.stopPropagation();
+
+            // 获取按钮的标签值
+            const tagValue = button.getAttribute('data-tag');
+
+            // 在输入框中插入标签
+            const textarea = document.getElementById('messageInput');
+            textarea.value = `#${tagValue}  `;
+
+            // 设置光标位置到输入框末尾
+            textarea.focus();
+            textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+
+            // 更新选中的标签
+            selectedTag = tagValue;
+
+            // 移除所有按钮的 active 类
+            buttons.forEach(btn => btn.classList.remove('active'));
+            // 添加当前点击按钮的 active 类
+            button.classList.add('active');
+        });
+    });
+}
 
 // 表单提交事件
 document.getElementById('messageForm').addEventListener('submit', async (e) => {
@@ -29,7 +61,7 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
     // 插入到 Supabase
     const { error } = await supabaseClient
         .from('messages')
-        .insert([{ content }]);
+        .insert([{ content, tag: selectedTag || '无标签' }]);
 
     if (error) {
         console.error('提交失败:', error);
@@ -54,7 +86,7 @@ async function loadMessages() {
 
     const { data, error } = await supabaseClient
         .from('messages')
-        .select('content, created_at')
+        .select('content, created_at, tag')
         .order('created_at', { ascending: false });
 
     if (error) {
@@ -83,16 +115,66 @@ async function loadMessages() {
 
         const messageEl = document.createElement('div');
         messageEl.className = 'message';
+        messageEl.setAttribute('data-full-content', item.content);
+        messageEl.setAttribute('data-date', dateStr);
+        messageEl.setAttribute('data-tag', item.tag || '无标签');
         messageEl.innerHTML = `
-            <div class="message-content">${escapeHtml(item.content)}</div>
-            <div class="message-time">${dateStr}</div>
+            <div class="message-content">${truncateText(item.content || '', 200)}</div>
+            <div class="message-time">${dateStr} - ${escapeHtml(item.tag || '无标签')}</div>
         `;
+        messageEl.addEventListener('click', showDetails);
         container.appendChild(messageEl);
     });
 }
 
+// 截断文本
+function truncateText(text, maxLength) {
+    if (text.length <= maxLength) {
+        return text;
+    }
+    return text.substring(0, maxLength) + '...';
+}
+
+// 显示详细信息
+function showDetails(event) {
+    const messageElement = event.currentTarget;
+    const fullContent = messageElement.getAttribute('data-full-content');
+    const date = messageElement.getAttribute('data-date');
+    const tag = messageElement.getAttribute('data-tag');
+
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modalMessageContent');
+    const modalTime = document.getElementById('modalMessageTime');
+
+    modalContent.textContent = escapeHtml(fullContent);
+    modalTime.textContent = `${date} - ${escapeHtml(tag)}`;
+
+    modal.style.display = 'block';
+}
+
+// 关闭模态框
+function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+}
+
+// 设置模态框关闭事件
+function setupModal() {
+    const closeBtn = document.querySelector('.close');
+    const modal = document.getElementById('modal');
+
+    closeBtn.addEventListener('click', closeModal);
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    };
+}
+
 // 防止 XSS：转义 HTML 特殊字符
 function escapeHtml(unsafe) {
+    if (typeof unsafe !== 'string') return '';
     return unsafe
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
