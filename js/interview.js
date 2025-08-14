@@ -86,7 +86,7 @@ function renderCards(dateFilter = null) {
             card.className = 'message';
             card.setAttribute('data-full-content', item.content);
             card.setAttribute('data-date', formattedDate);
-            card.setAttribute('data-tag', item.tag || '无标签');
+            card.setAttribute('data-tag', item.tag || '留白集');
             card.innerHTML = `
                 <div class="message-content">${truncateText(item.content || '', 100)}</div>
             `;
