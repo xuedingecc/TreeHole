@@ -14,6 +14,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderTimeline();
     renderCards();
     setupModal();
+
+    // 默认高亮第一个时间轴项
+    if (document.querySelector('.timeline-item')) {
+        document.querySelector('.timeline-item').classList.add('active');
+    }
 });
 
 /* 1. 加载数据 */
@@ -33,6 +38,8 @@ async function loadInterviewNotes() {
     grouped = groupByDate(data);
 }
 
+
+
 function groupByDate(arr) {
     return arr.reduce((acc, cur) => {
         const day = cur.created_at.slice(0, 10);
@@ -48,7 +55,7 @@ function renderTimeline() {
         .forEach(date => {
             const div = document.createElement('div');
             div.className = 'timeline-item';
-            div.textContent = date;
+            div.textContent = formatDateForDisplay(date);
             div.onclick = () => scrollToDate(date);
             timelineEl.appendChild(div);
         });
@@ -59,32 +66,53 @@ function renderCards(dateFilter = null) {
     const container = document.getElementById('interviewCards');
     container.innerHTML = '';
 
-    const target = dateFilter
-        ? grouped[dateFilter] || []
-        : interviewData;
+    // 按日期排序
+    const sortedDates = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
 
-    target.forEach(item => {
-        const date = new Date(item.created_at);
-        const dateStr = `${date.getFullYear()}年${(date.getMonth() + 1).toString().padStart(2, '0')}月${date.getDate().toString().padStart(2, '0')}日`;
+    sortedDates.forEach(date => {
+        // 如果有日期过滤且不匹配则跳过
+        if (dateFilter && date !== dateFilter) return;
 
-        const card = document.createElement('div');
-        card.className = 'message';
-        card.setAttribute('data-full-content', item.content);
-        card.setAttribute('data-date', dateStr);
-        card.setAttribute('data-tag', item.tag || '无标签');
-        card.innerHTML = `
-            <div class="message-content">${truncateText(item.content || '', 100)}</div>
+        // 创建日期标题
+        const dateHeader = document.createElement('div');
+        dateHeader.className = 'date-header';
+        const formattedDate = formatDateForDisplay(date);
+        dateHeader.textContent = formattedDate;
+        container.appendChild(dateHeader);
 
-        `;
-        card.addEventListener('click', showDetails);
-        container.appendChild(card);
+        // 创建该日期的所有卡片
+        grouped[date].forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'message';
+            card.setAttribute('data-full-content', item.content);
+            card.setAttribute('data-date', formattedDate);
+            card.setAttribute('data-tag', item.tag || '无标签');
+            card.innerHTML = `
+                <div class="message-content">${truncateText(item.content || '', 100)}</div>
+            `;
+            card.addEventListener('click', showDetails);
+            container.appendChild(card);
+        });
     });
+}
+
+// 辅助函数：格式化日期显示
+function formatDateForDisplay(dateStr) {
+    const [year, month, day] = dateStr.split('-');
+    return `${year}年${month}月${day}日`;
 }
 
 /* 4. 时间轴点击 -> 滚动定位到对应日期的卡片 */
 function scrollToDate(date) {
     renderCards(date);
+
+    // 滚动到顶部（因为现在每次点击都会重新渲染）
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // 高亮选中的时间轴项
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        item.classList.toggle('active', item.textContent === formatDateForDisplay(date));
+    });
 }
 
 /* 5. 模态框（复用已有逻辑） */
