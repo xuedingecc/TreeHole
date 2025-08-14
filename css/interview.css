@@ -73,11 +73,25 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-height: 500px;   /* 限制高度 */
+  max-height: 1000px;   /* 限制高度 */
   overflow-y: auto;    /* 超出滚动 */
 }
 
 .navbar a {
   text-decoration: none;
   color: inherit;   /* 保持原来字体颜色 */
+}
+
+/* 日期标题样式 */
+.date-header {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--timeline-color);
+    margin: 1.5rem 0 0.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.date-header:first-child {
+    margin-top: 0;
 }
