@@ -61,7 +61,7 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
     // 插入到 Supabase
     const { error } = await supabaseClient
         .from('messages')
-        .insert([{ content, tag: selectedTag || '无标签' }]);
+        .insert([{ content, tag: selectedTag || '留白集' }]);
 
     if (error) {
         console.error('提交失败:', error);
@@ -117,7 +117,7 @@ async function loadMessages() {
         messageEl.className = 'message';
         messageEl.setAttribute('data-full-content', item.content);
         messageEl.setAttribute('data-date', dateStr);
-        messageEl.setAttribute('data-tag', item.tag || '无标签');
+        messageEl.setAttribute('data-tag', item.tag || '留白集');
         messageEl.innerHTML = `
             <div class="message-content">${truncateText(item.content || '', 200)}</div>
             <div class="message-time">${dateStr} - ${escapeHtml(item.tag || '无标签')}</div>
