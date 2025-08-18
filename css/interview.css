@@ -23,6 +23,7 @@ body {
     padding-right: 1rem;
     margin-right: 2rem;
     flex-shrink: 0;
+    height: 100%
 }
 
 .timeline-item {
@@ -59,6 +60,7 @@ body {
     gap: 1.5rem;
 }
 
+
 .interview-cards .message {
     cursor: pointer;
 }
@@ -74,7 +76,6 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   max-height: 1000px;   /* 限制高度 */
-  overflow-y: auto;    /* 超出滚动 */
 }
 
 .navbar a {
