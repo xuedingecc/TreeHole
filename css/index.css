@@ -192,7 +192,6 @@ h1 {
     position: relative;
     transition: transform 0.3s ease;
     cursor: pointer; /* 添加鼠标指针样式 */
-    overflow: hidden;
 }
 
 .message:hover {
